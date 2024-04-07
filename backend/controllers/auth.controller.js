@@ -55,10 +55,28 @@ const signup = async (req, res) => {
   }
 };
 
-const login = (req, res) => {
+const login = async (req, res) => {
   try {
-    console.log(req.body);
-    res.send("Login");
+    const { username, password } = req.body;
+    const user = await User.findOne({ username });
+
+    if (!user) {
+      // change later to invalid credentials as we don't want to expose if the user exists or not
+      return res.status(404).json({ error: "Cannot find the user" });
+    }
+
+    const isPasswordMatch = await bcrypt.compare(password, user.password);
+    if (!isPasswordMatch) {
+      return res.status(400).json({ error: "Invalid credentials" });
+    }
+
+    generateTokenAndSetCookie(res, user._id);
+    res.status(200).json({
+      _id: user._id,
+      fullName: user.fullName,
+      username: user.username,
+      profilePic: user.profilePicture,
+    });
   } catch (err) {
     console.log(err);
     res.status(500).send("Internal Server Error");
@@ -66,7 +84,16 @@ const login = (req, res) => {
 };
 
 const signout = (req, res) => {
-  res.send("Signout");
+  try {
+    res.cookie("token", "", {
+      httpOnly: true,
+      maxAge: 0,
+    });
+    res.status(200).json({ message: "Signout successfully" });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Internal Server Error");
+  }
 };
 
 module.exports = {
