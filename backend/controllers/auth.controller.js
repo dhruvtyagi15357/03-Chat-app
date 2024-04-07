@@ -1,19 +1,12 @@
 const User = require("../models/user.model");
 const bcrypt = require("bcryptjs");
+const generateTokenAndSetCookie = require("../utils/generateToken");
 
 const signup = async (req, res) => {
   try {
-    const { fullName, username, email, password, confirmPassword, gender } =
-      req.body;
+    const { fullName, username, password, confirmPassword, gender } = req.body;
 
-    if (
-      !fullName ||
-      !username ||
-      !email ||
-      !password ||
-      !confirmPassword ||
-      !gender
-    ) {
+    if (!fullName || !username || !password || !confirmPassword || !gender) {
       return res.status(400).json({ error: "All fields are required" });
     }
 
@@ -38,18 +31,15 @@ const signup = async (req, res) => {
     const newUser = new User({
       fullName,
       username,
-      email,
       password: hashPassword,
       gender,
       profilePicture,
     });
 
     if (newUser) {
-
-        // generate JWT token here!
-        
+      // generate JWT token here!
+      generateTokenAndSetCookie(res, newUser._id);
       await newUser.save();
-
       res.status(201).json({
         _id: newUser._id,
         fullName: newUser.fullName,
@@ -66,7 +56,13 @@ const signup = async (req, res) => {
 };
 
 const login = (req, res) => {
-  res.send("Login");
+  try {
+    console.log(req.body);
+    res.send("Login");
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Internal Server Error");
+  }
 };
 
 const signout = (req, res) => {
