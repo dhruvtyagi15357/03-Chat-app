@@ -1,10 +1,10 @@
 const express = require("express");
 
 const protectRoute = require("../middleware/protectRoute");
+const { getUsersForSidebar } = require("../controllers/user.controller");
+
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  res.send("Hello World from uesrRoutes.js");
-});
+router.get("/", protectRoute, getUsersForSidebar);
 
 module.exports = router;
