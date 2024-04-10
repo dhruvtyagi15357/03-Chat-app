@@ -3,8 +3,9 @@ const dotenv = require('dotenv');
 const cookieParser = require('cookie-parser');
 
 const authRoutes = require('./routes/authRoutes');
-const connect = require('./db/connect');
 const messageRoutes = require('./routes/messageRoutes');
+const userRoutes = require('./routes/userRoutes');
+const connect = require('./db/connect');
 
 dotenv.config();
 
@@ -16,6 +17,7 @@ app.use(cookieParser());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
+app.use("/api/users", userRoutes);
 
 
 app.listen(PORT, async () => {
