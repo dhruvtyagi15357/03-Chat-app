@@ -19,7 +19,7 @@ const Signup = () => {
   };
   return (
     // add classes here, left blank for now
-    <div className=" flex flex-col items-center justify-center min-w-96 mx-auto">
+    <div className=" flex flex-col items-center justify-center min-w-96 mx-auto lg:min-w-[50%]">
       <div className=" w-full bg-gray-500 p-6 rounded-lg shadow-md bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0">
         <h1 className=" text-3xl font-semibold text-center text-gray-300">
           Signup
@@ -34,7 +34,7 @@ const Signup = () => {
                 type="text"
                 className=" input input-bordered h-10 w-full"
                 placeholder="Enter your Full Name"
-                onChange={(e) => setUser({...user, fullName: e.target.value})}
+                onChange={(e) => setUser({ ...user, fullName: e.target.value })}
               />
             </div>
             <div className="mt-2">
@@ -45,7 +45,7 @@ const Signup = () => {
               <input
                 type="text"
                 className=" input input-bordered h-10 w-full"
-                onChange={(e) => setUser({...user, username: e.target.value})}
+                onChange={(e) => setUser({ ...user, username: e.target.value })}
                 placeholder="Enter your username"
               />
             </div>
@@ -57,7 +57,7 @@ const Signup = () => {
               <input
                 type="password"
                 className=" input input-bordered h-10 w-full"
-                onChange={(e) => setUser({...user, password: e.target.value})}
+                onChange={(e) => setUser({ ...user, password: e.target.value })}
                 placeholder="Enter your Password"
               />
             </div>
@@ -69,7 +69,9 @@ const Signup = () => {
               <input
                 type="password"
                 className=" input input-bordered h-10 w-full"
-                onChange={(e) => setUser({...user, rePassword: e.target.value})}
+                onChange={(e) =>
+                  setUser({ ...user, rePassword: e.target.value })
+                }
                 placeholder="Re-enter your Password"
               />
             </div>

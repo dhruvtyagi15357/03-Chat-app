@@ -9,7 +9,7 @@ const GenderCheckbox = ({user, setUser}) => {
     setUser({...user, gender:e.target.value})
   };
   return (
-    <div className="flex">
+    <div className="flex justify-center space-x-3 mt-4">
       <div className="form-control">
         <label htmlFor="" className={`label gap-2 cursor-pointer`}>
           <span className=" label-text">Male</span>
