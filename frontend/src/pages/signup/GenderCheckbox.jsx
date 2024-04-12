@@ -16,6 +16,7 @@ const GenderCheckbox = ({user, setUser}) => {
           <input
             type="radio"
             name="radio1"
+            required={true}
             value="male"
             className="radio border-slate-900"
             onChange={handleChange}

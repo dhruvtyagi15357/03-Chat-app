@@ -32,6 +32,7 @@ const Signup = () => {
 
               <input
                 type="text"
+                required
                 className=" input input-bordered h-10 w-full"
                 placeholder="Enter your Full Name"
                 onChange={(e) => setUser({ ...user, fullName: e.target.value })}
@@ -44,6 +45,7 @@ const Signup = () => {
 
               <input
                 type="text"
+                required
                 className=" input input-bordered h-10 w-full"
                 onChange={(e) => setUser({ ...user, username: e.target.value })}
                 placeholder="Enter your username"
@@ -56,6 +58,7 @@ const Signup = () => {
 
               <input
                 type="password"
+                required
                 className=" input input-bordered h-10 w-full"
                 onChange={(e) => setUser({ ...user, password: e.target.value })}
                 placeholder="Enter your Password"
@@ -68,6 +71,7 @@ const Signup = () => {
 
               <input
                 type="password"
+                required
                 className=" input input-bordered h-10 w-full"
                 onChange={(e) =>
                   setUser({ ...user, rePassword: e.target.value })
