@@ -8,3 +8,26 @@ body {
     background-size: cover;
     background-position: center;
 }
+/* in order to change the length of the scrolbar: 
+
+
+
+*/
+
+::-webkit-scrollbar{
+    width: 8px;
+    
+}
+
+::-webkit-scrollbar-track{
+    background: #555;
+    border-radius: 10px;
+
+}
+
+::-webkit-scrollbar-thumb{
+    background: #242424;
+    border-radius: 10px;
+
+
+}
