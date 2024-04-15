@@ -1,21 +1,22 @@
 import React, { useEffect } from "react";
 
-const GenderCheckbox = ({user, setUser}) => {
+const GenderCheckbox = ({handleCheckbox}) => {
 
 
 
   const handleChange = (e) => {
     // setGender(e.target.value);
-    setUser({...user, gender:e.target.value})
+    handleCheckbox(e.target.value);
   };
   return (
     <div className="flex justify-center space-x-3 mt-4">
       <div className="form-control">
-        <label htmlFor="" className={`label gap-2 cursor-pointer`}>
+        <label htmlFor="genderMale" className={`label gap-2 cursor-pointer`}>
           <span className=" label-text">Male</span>
           <input
             type="radio"
             name="radio1"
+            id="genderMale"
             required={true}
             value="male"
             className="radio border-slate-900"
@@ -25,11 +26,12 @@ const GenderCheckbox = ({user, setUser}) => {
       </div>
 
       <div className="form-control">
-        <label htmlFor="" className={`label gap-2 cursor-pointer`}>
+        <label htmlFor="genderFemale" className={`label gap-2 cursor-pointer`}>
           <span className=" label-text">Female</span>
           <input
             type="radio"
             name="radio1"
+            id="genderFemale"
             value="female"
             className="radio border-slate-900"
             onChange={handleChange}
@@ -38,11 +40,12 @@ const GenderCheckbox = ({user, setUser}) => {
       </div>
 
       <div className="form-control">
-        <label htmlFor="" className={`label gap-2 cursor-pointer`}>
+        <label htmlFor="genderOther" className={`label gap-2 cursor-pointer`}>
           <span className=" label-text">Other</span>
           <input
             type="radio"
             name="radio1"
+            id="genderOther"
             value="other"
             className="radio border-slate-900"
             onChange={handleChange}

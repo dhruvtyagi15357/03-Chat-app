@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const handleSubmit = (e) => {
@@ -40,11 +41,11 @@ const Login = () => {
             <div>
               {/* if the user dont have an account */}
 
-              <a
-                href="#"
+              <Link
+                to="/signup"
                 className="text-sm mt-2 duration-500 hover:underline hover:text-blue-600 inline-block transition-colors ">
                 {"Don't"} have an account? Register
-              </a>
+              </Link>
               {/*  submit button */}
               <button
                 type="submit"

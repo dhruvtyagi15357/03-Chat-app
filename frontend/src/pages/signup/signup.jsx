@@ -2,9 +2,11 @@ import React from "react";
 import GenderCheckbox from "./GenderCheckbox";
 
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import useSignup from "../../hooks/useSignup";
+
 
 const Signup = () => {
-  const [gender, setGender] = useState("");
   const [user, setUser] = useState({
     fullName: "",
     username: "",
@@ -13,10 +15,18 @@ const Signup = () => {
     gender: ""
   })
 
+  const handleCheckbox = (gender) => {
+    setUser({ ...user, gender})
+  }
+  const {signup, loading} = useSignup();
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    signup(user)
     console.log(user);
   };
+
+
   return (
     // add classes here, left blank for now
     <div className=" flex flex-col items-center justify-center min-w-96 mx-auto lg:min-w-[50%]">
@@ -32,6 +42,7 @@ const Signup = () => {
 
               <input
                 type="text"
+                value={user.fullName}
                 required
                 className=" input input-bordered h-10 w-full"
                 placeholder="Enter your Full Name"
@@ -46,6 +57,7 @@ const Signup = () => {
               <input
                 type="text"
                 required
+                value={user.username}
                 className=" input input-bordered h-10 w-full"
                 onChange={(e) => setUser({ ...user, username: e.target.value })}
                 placeholder="Enter your username"
@@ -59,6 +71,7 @@ const Signup = () => {
               <input
                 type="password"
                 required
+                value={user.password}
                 className=" input input-bordered h-10 w-full"
                 onChange={(e) => setUser({ ...user, password: e.target.value })}
                 placeholder="Enter your Password"
@@ -72,6 +85,7 @@ const Signup = () => {
               <input
                 type="password"
                 required
+                value={user.rePassword}
                 className=" input input-bordered h-10 w-full"
                 onChange={(e) =>
                   setUser({ ...user, rePassword: e.target.value })
@@ -79,16 +93,16 @@ const Signup = () => {
                 placeholder="Re-enter your Password"
               />
             </div>
-            <GenderCheckbox user={user} setUser={setUser} />
+            <GenderCheckbox handleCheckbox={handleCheckbox} user={user} setUser={setUser} />
 
             <div>
               {/* if the user dont have an account */}
 
-              <a
-                href="#"
+              <Link
+                to="/login"
                 className="text-sm mt-2 duration-500 hover:underline hover:text-blue-600 inline-block transition-colors ">
                 Already have an account? Login
-              </a>
+              </Link>
               {/*  submit button */}
               <button
                 type="submit"
