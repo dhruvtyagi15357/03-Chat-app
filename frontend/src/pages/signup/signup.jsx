@@ -28,7 +28,6 @@ const Signup = () => {
 
 
   return (
-    // add classes here, left blank for now
     <div className=" flex flex-col items-center justify-center min-w-96 mx-auto lg:min-w-[50%]">
       <div className=" w-full bg-gray-500 p-6 rounded-lg shadow-md bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0">
         <h1 className=" text-3xl font-semibold text-center text-gray-300">
