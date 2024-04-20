@@ -5,30 +5,28 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import useSignup from "../../hooks/useSignup";
 
-
 const Signup = () => {
   const [user, setUser] = useState({
     fullName: "",
     username: "",
     password: "",
     rePassword: "",
-    gender: ""
-  })
+    gender: "",
+  });
 
   const handleCheckbox = (gender) => {
-    setUser({ ...user, gender})
-  }
-  const {signup, loading} = useSignup();
+    setUser({ ...user, gender });
+  };
+  const { signup, loading } = useSignup();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    signup(user)
+    signup(user);
     console.log(user);
   };
 
-
   return (
-    <div className=" flex flex-col items-center justify-center min-w-96 mx-auto lg:min-w-[50%]">
+    <div className=" flex flex-col items-center justify-center min-w-96 mx-auto">
       <div className=" w-full bg-gray-500 p-6 rounded-lg shadow-md bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0">
         <h1 className=" text-3xl font-semibold text-center text-gray-300">
           Signup
@@ -92,7 +90,11 @@ const Signup = () => {
                 placeholder="Re-enter your Password"
               />
             </div>
-            <GenderCheckbox handleCheckbox={handleCheckbox} user={user} setUser={setUser} />
+            <GenderCheckbox
+              handleCheckbox={handleCheckbox}
+              user={user}
+              setUser={setUser}
+            />
 
             <div>
               {/* if the user dont have an account */}
@@ -105,8 +107,13 @@ const Signup = () => {
               {/*  submit button */}
               <button
                 type="submit"
+                disabled={loading}
                 className="btn content-center btn-primary btn-block mt-4 btn-sm p-4">
-                Sign up
+                {loading ? (
+                  <span className="loading loading-spinner" />
+                ) : (
+                  "Sign up"
+                )}
               </button>
             </div>
           </form>

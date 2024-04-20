@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import useLogin from "../../hooks/useLogin";
 
 const Login = () => {
-  const handleSubmit = (e) => {
+  
+  const [ user, setUser ] = useState({
+    username: "",
+    password: ""
+  });
+  
+  const {login, loading} = useLogin();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("submitted");
-    console.log(e.target[0].value);
-    console.log(e.target[1].value);
+    await login(user);
   };
   return (
     // add classes here, left blank for now
@@ -23,7 +30,9 @@ const Login = () => {
 
               <input
                 type="text"
+                value={user.username}
                 className=" input input-bordered h-10 w-full"
+                onChange={(e) => setUser({ ...user, username: e.target.value })}
                 placeholder="Enter your username"
               />
             </div>
@@ -33,8 +42,10 @@ const Login = () => {
               </label>
 
               <input
+                value={user.password}
                 type="password"
                 className=" input input-bordered h-10 w-full"
+                onChange={(e) => setUser({ ...user, password: e.target.value })}
                 placeholder="Enter your Password"
               />
             </div>
@@ -50,7 +61,11 @@ const Login = () => {
               <button
                 type="submit"
                 className="btn content-center btn-primary btn-block mt-4 btn-sm p-4">
-                Login
+                {loading ? (
+                  <span className="loading loading-spinner" />
+                ) : (
+                  "Login"
+                )}
               </button>
             </div>
           </form>
