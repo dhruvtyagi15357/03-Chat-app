@@ -22,10 +22,11 @@ const useLogin = () => {
         }),
       });
       const data = await res.json();
-      if (res.ok) {
+      if (res.ok) { // res.ok is true if status code is 200-299
         toast.success("User signed in!");
       } else {
         toast.error("Error " + res.status + " : " + data.error);
+        throw new Error(data.error);
       }
       console.log(data);
 
