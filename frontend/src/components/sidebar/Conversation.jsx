@@ -15,7 +15,7 @@ const Conversation = ({conversation, emoji, lastidx}) => {
         onClick={() => {setSelectedConversation(conversation)}}
         className={`flex gap-2 items-center ${
           isSelected ? "bg-sky-500" : ""
-        } hover:bg-sky-400 transition-all duration-300 rounded p-2 py-1 cursor-pointer`}>
+        } hover:bg-slate-700 transition-all duration-300 rounded p-2 py-1 cursor-pointer`}>
         <div className="avatar online">
           <div className="w-12 rounded-full">
             <img src={`${conversation.profilePicture}`} alt="user avatar" />
