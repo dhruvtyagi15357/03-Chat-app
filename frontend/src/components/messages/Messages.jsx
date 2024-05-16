@@ -1,8 +1,9 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useContext, useEffect, useRef } from 'react'
 import Message from './Message'
 import useGetMessages from '../../hooks/useGetMessages';
 import { TiMessages } from "react-icons/ti";
 import MessageSkeleton from '../skeletons/MessageSkeleton';
+import { AuthContext } from '../../context/AuthContext';
 
 const Messages = () => {
   const {messages, loading} = useGetMessages();
@@ -27,11 +28,18 @@ const Messages = () => {
         </>
       ) : // check the length of the messages array
       messages.length > 0 ? (
-        messages.map((message, index) => (
-          <div className="" key = {message._id} ref={lastMessageRef}>
-            <Message message={message} />
-          </div>
-        ))
+        messages.map((message) =>{ 
+            const { AuthUser } = useContext(AuthContext);
+            const fromMe = message.senderID === AuthUser._id;
+
+          return (
+            <div
+              className={`chat chat-${fromMe ? "end" : "start"}`}
+              key={message._id}
+              ref={lastMessageRef}>
+              <Message message={message} />
+            </div>
+          );})
       ) : (
         // <p>No messages yet</p> should be at the center of the screen and at middle
         <div className="flex flex-col items-center justify-center h-full w-full">
