@@ -18,15 +18,17 @@ const useLogin = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           username: user.username,
-          password: user.password
+          password: user.password,
         }),
       });
       const data = await res.json();
-      if (res.ok) { // res.ok is true if status code is 200-299
+      if (res.ok) {
+        // res.ok is true if status code is 200-299
         toast.success("User signed in!");
       } else {
-        toast.error("Error " + res.status + " : " + data.error);
-        throw new Error(data.error);
+        setLoading(false);
+        return toast.error("Error " + res.status + " : " + data.error);
+        // throw new Error(data.error);
       }
       console.log(data);
 

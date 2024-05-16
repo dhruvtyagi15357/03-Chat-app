@@ -1,5 +1,5 @@
 import React from "react";
-import { ConversationContextProvider, useConversationContext } from "../../context/ConversationContext";
+import {useConversationContext } from "../../context/ConversationContext";
 
 
 const Conversation = ({conversation, emoji, lastidx}) => {

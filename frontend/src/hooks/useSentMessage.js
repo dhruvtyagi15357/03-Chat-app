@@ -22,8 +22,8 @@ const useSentMessage = () => {
       if (!res.ok) {
         throw new Error(data.message);
       }
-      setMessages([...messages, data.message]);
-      toast.success("Message sent");
+      setMessages([...messages, data]);
+      // toast.success("Message sent");
     } catch (error) {
       toast.error(error.message);
     } finally {

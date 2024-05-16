@@ -28,8 +28,9 @@ const useSignup = () => {
       if (res.ok) {
         toast.success("User created successfully and signed in!");
       } else {
-        toast.error("Error " + res.status + " : " + data.error);
-        throw new Error(data.error);
+        setLoading(false);
+        return toast.error("Error " + res.status + " : " + data.error);
+        // throw new Error(data.error);
       }
       console.log(data);
 
