@@ -18,6 +18,9 @@ const Messages = () => {
     }, 100);
   }, [messages]);
 
+              const { AuthUser } = useContext(AuthContext);
+
+
   return (
     <div className="px-4 flex-1 overflow-auto">
       {loading ? (
@@ -29,9 +32,7 @@ const Messages = () => {
       ) : // check the length of the messages array
       messages.length > 0 ? (
         messages.map((message) =>{ 
-            const { AuthUser } = useContext(AuthContext);
             const fromMe = message.senderID === AuthUser._id;
-
           return (
             <div
               className={`chat chat-${fromMe ? "end" : "start"}`}
