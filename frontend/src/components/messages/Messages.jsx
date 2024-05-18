@@ -3,7 +3,7 @@ import Message from './Message'
 import useGetMessages from '../../hooks/useGetMessages';
 import { TiMessages } from "react-icons/ti";
 import MessageSkeleton from '../skeletons/MessageSkeleton';
-import { AuthContext } from '../../context/AuthContext';
+import useListenMessages from '../../hooks/useListenMessages';
 
 const Messages = () => {
   const {messages, loading} = useGetMessages();
@@ -11,15 +11,13 @@ const Messages = () => {
   // convert to array of messages
 
   // scroll to the bottom of the messages
+  useListenMessages();
   const lastMessageRef = useRef();
   useEffect(() => {
     setTimeout(() => {
       lastMessageRef.current?.scrollIntoView({ behavior: "smooth" });
     }, 100);
   }, [messages]);
-
-              const { AuthUser } = useContext(AuthContext);
-
 
   return (
     <div className="px-4 flex-1 overflow-auto">
@@ -32,11 +30,10 @@ const Messages = () => {
       ) : // check the length of the messages array
       messages.length > 0 ? (
         messages.map((message) =>{ 
-            const fromMe = message.senderID === AuthUser._id;
           return (
             <div
-              className={`chat chat-${fromMe ? "end" : "start"}`}
               key={message._id}
+              className=' '
               ref={lastMessageRef}>
               <Message message={message} />
             </div>
