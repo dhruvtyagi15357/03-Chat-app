@@ -6,6 +6,7 @@ const Message = ({ message }) => {
   const { selectedConversation } = useConversationContext();
   const { AuthUser } = useContext(AuthContext);
   const fromMe = message.senderID === AuthUser._id;
+  const shake = message.shouldShake ? "shake" : "";
 
 
 
@@ -29,6 +30,7 @@ const Message = ({ message }) => {
         <div
           className={`chat-bubble text-white ${
             fromMe ? "bg-blue-500" : ""
+          } ${shake}
           } pb-2`}>
           {message.message}
         </div>
